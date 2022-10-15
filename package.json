@@ -1,0 +1,26 @@
+{
+  "name": "amazon-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon  backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aelhor/amazon-clone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aelhor/amazon-clone/issues"
+  },
+  "homepage": "https://github.com/aelhor/amazon-clone#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
