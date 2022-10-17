@@ -9,6 +9,7 @@ const data = {
             brand: 'Nike',
             rating: 4.5,
             numReviews: 10,
+            countInStock:10,
             description: 'high quality product',
         },
         {
@@ -20,6 +21,8 @@ const data = {
             brand: 'Adidas',
             rating: 4.0,
             numReviews: 10,
+            countInStock:10,
+
             description: 'high quality product',
         },
         {
@@ -31,6 +34,8 @@ const data = {
             brand: 'Lacoste',
             rating: 4.8,
             numReviews: 17,
+            countInStock:10,
+
             description: 'high quality product',
         },
         {
@@ -42,6 +47,8 @@ const data = {
             brand: 'Nike',
             rating: 4.5,
             numReviews: 14,
+            countInStock:10,
+
             description: 'high quality product',
         },
         {
