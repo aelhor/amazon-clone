@@ -169,3 +169,12 @@ img.large {
   color: #a02020;
   background-color: #ffe0e0;
 }
+
+.badge {
+  background-color: #f02020;
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 0.2rem 0.7rem;
+  font-size: 1.2rem;
+  margin-left: 0.2rem;
+}
