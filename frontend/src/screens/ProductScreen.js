@@ -20,6 +20,7 @@ const ProductScreen = (props) => {
 
     const addToCartHandler = () => {
         // props.history.push(`cart/${id}?qty=${qty}`)
+        console.log('Product added to cart ')
         navigate(`/cart/${ id }?qty=${ qty }`);
     }
 
@@ -82,8 +83,7 @@ const ProductScreen = (props) => {
                                                         <div>
                                                             <select
                                                                 value={qty}
-                                                                onChange={(e) => setQty(e.target.value)}
-                                                            >
+                                                                onChange={(e) => setQty(e.target.value)}>
                                                                 {[...Array(product.countInStock).keys()].map(
                                                                     (x) => (
                                                                         <option key={x + 1} value={x + 1}>

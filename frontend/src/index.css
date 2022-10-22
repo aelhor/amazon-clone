@@ -178,3 +178,11 @@ img.large {
   font-size: 1.2rem;
   margin-left: 0.2rem;
 }
+
+img.small {
+  max-width: 5rem;
+  width: 100%;
+}
+.min-30 {
+  min-width: 30rem;
+}
