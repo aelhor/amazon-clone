@@ -4,10 +4,12 @@ const app = express()
 const mongoose = require('mongoose')
 const userRouter = require('./routes/userRouter')
 const productRouter = require('./routes/productRouter')
+const dotenv =require('dotenv');
 
+dotenv.config();
 
 // db connection 
-const connectionString = 'mongodb+srv://ahmedel:3179931mongodb@cluster0.psxtr.mongodb.net/?retryWrites=true&w=majority'
+const connectionString = process.env.MONGODB_URI
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -16,14 +18,13 @@ mongoose.connect(connectionString, {
     if (err) console.log(err)
     else console.log("mongdb is connected");
 })
+// middelewares
+app.use(express.json());
 
+// Routes
 app.get('/', (req, res) => {
     res.send("Hello")
 })
-
-
-
-
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter)
 

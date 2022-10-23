@@ -12,12 +12,13 @@ productRouter.get('/seed', expressAsyncHandler(async (req, res) => {
 })
 );
 
-
+// GET /api/products
 productRouter.get('/', expressAsyncHandler(async (req, res) => {
     const products = await Product.find()
     res.send(products)
 }))
 
+// GET /api/products/:id
 productRouter.get('/:id', expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
@@ -27,9 +28,6 @@ productRouter.get('/:id', expressAsyncHandler(async (req, res) => {
     }
 })
 );
-
-
-
 
 module.exports = productRouter
 

@@ -11,7 +11,7 @@ const ProductScreen = (props) => {
     const [qty, setQty] = useState(1);
     const navigate = useNavigate();
     let { id } = useParams();
-    console.log(id)
+    // console.log(id)
     const productDetails = useSelector((state) => state.productDetails);
     const { error, loading, product } = productDetails
     useEffect(() => {
