@@ -7,13 +7,15 @@ const expressAsyncHandler = require('express-async-handler')
 const bcrypt = require('bcrypt')
 const { generateToken } = require('../utils')
 
+
+// dev route
 userRouter.get('/seed', expressAsyncHandler(async (req, res) => {
     const user = await User.insertMany(data.users)
     res.send(user)
 })
 );
 
-// GET /api/users 
+// GET 'all users' /api/users 
 userRouter.get('/', expressAsyncHandler(async (req, res) => {
     const users = await User.find()
     res.send(users)

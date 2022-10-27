@@ -3,12 +3,12 @@ import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/cartConstants';
 
 export const addToCart = (productId, qty) => async (dispatch, getState) => {
 
-    const {data}  = await axios.get(`/api/products/${productId}`)
+    const { data } = await axios.get(`/api/products/${productId}`)
     // console.log('data: ', data)
     dispatch({
         // requesting the redux store this data to cart 
         type: CART_ADD_ITEM,
-        payload : {
+        payload: {
             name: data.name,
             image: data.image,
             price: data.price,
@@ -24,4 +24,4 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
 export const removeFromCart = (productId) => (dispatch, getState) => {
     dispatch({ type: CART_REMOVE_ITEM, payload: productId });
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
-  };
+};
