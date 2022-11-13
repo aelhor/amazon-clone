@@ -18,7 +18,7 @@ userRouter.get('/seed', expressAsyncHandler(async (req, res) => {
 // GET 'all users' /api/users 
 userRouter.get('/', expressAsyncHandler(async (req, res) => {
     const users = await User.find()
-    res.send(users)
+    res.send({count: users.length, users: users})
 }))
 
 
@@ -26,7 +26,6 @@ userRouter.get('/', expressAsyncHandler(async (req, res) => {
 userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
     const user = await User.findOne({ email: req.body.email })
 
-    console.log(user)
     if (user) {
         const match = await bcrypt.compare(req.body.password, user.password);
         console.log('match: ', match)
@@ -41,6 +40,24 @@ userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
         }
     }
     res.status(401).send({ message: 'Invalid email or password' })
+})
+);
+
+// POST /api/register 
+userRouter.post('/register', expressAsyncHandler(async (req, res) => {
+    const user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, 8),
+    })
+    const createdUser = await user.save()
+    res.status(200).send({
+        _id: createdUser._id,
+      name: createdUser.name,
+      email: createdUser.email,
+      isAdmin: createdUser.isAdmin,
+      token: generateToken(createdUser),
+    })
 })
 );
 

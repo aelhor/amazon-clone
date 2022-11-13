@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { productDetailsReducer, productListReducer } from "./reducer/productReducer";
 import { combineReducers } from 'redux'
 import { cartReducer } from './reducer/cartReducers';
-import { userSigninReducer } from './reducer/userReducers'
+import { userRegisterReducer, userSigninReducer } from './reducer/userReducers'
 const preloadedState = {
     cart: {
         cartItems: localStorage.getItem('cartItems')
@@ -21,7 +21,7 @@ const reducer = combineReducers({
     productDetails: productDetailsReducer,
     cart: cartReducer,
     userSignin: userSigninReducer,
-
+    userRegister : userRegisterReducer
 });
 
 // store is the container of initState and reducer 
