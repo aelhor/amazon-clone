@@ -9,6 +9,10 @@ const preloadedState = {
         cartItems: localStorage.getItem('cartItems')
             ? JSON.parse(localStorage.getItem('cartItems'))
             : [],
+        shippingAddress: localStorage.getItem('shipping-address')
+            ? JSON.parse(localStorage.getItem('shipping-address'))
+            : {},
+        paymentMethod: 'paypal'
     },
     userSignin: {
         userInfo: localStorage.getItem('userInfo')
@@ -21,7 +25,7 @@ const reducer = combineReducers({
     productDetails: productDetailsReducer,
     cart: cartReducer,
     userSignin: userSigninReducer,
-    userRegister : userRegisterReducer
+    userRegister: userRegisterReducer
 });
 
 // store is the container of initState and reducer 

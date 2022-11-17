@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart  } from '../actions/cartActions';
@@ -11,6 +11,7 @@ const CartScreen = (props) => {
     let qty = location.search ? parseInt(location.search.split('=')[1]) : 1
     let { id } = params
     console.log(params, qty)
+    const navigate = useNavigate();
 
     const cart = useSelector((state) => state.cart);
     const { cartItems } = cart;
@@ -27,7 +28,9 @@ const CartScreen = (props) => {
         dispatch(removeFromCart(id))
     }
     const checkoutHandler = () => {
-        console.log('delete')
+        // Navigate to shipping screen 
+        navigate('/shipping')
+        
     }
     
     return (
