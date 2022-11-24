@@ -4,6 +4,7 @@ const app = express()
 const mongoose = require('mongoose')
 const userRouter = require('./routes/userRouter')
 const productRouter = require('./routes/productRouter')
+const orderRouter = require('./routes/orderRouter')
 const dotenv =require('dotenv');
 
 dotenv.config();
@@ -23,15 +24,15 @@ app.use(express.json());
 
 // Routes
 app.get('/', (req, res) => {
-    res.send("Hello")
+    res.send("amazon clone")
 })
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter)
+app.use('/api/orders', orderRouter)
 
 app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });
 });
-
 
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`server on ${port}`))

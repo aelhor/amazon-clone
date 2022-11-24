@@ -6,7 +6,7 @@ import CheckoutSteps from '../components/Checkoutsteos'
 const PlaceOrderScreen = () => {
 
     const cart = useSelector((state) => state.cart);
-
+    console.log('cart:', cart)
     const { cartItems, shippingAddress } = cart
     const navigate = useNavigate()
     useEffect(() => {
