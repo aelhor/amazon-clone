@@ -7,7 +7,6 @@ import {  useNavigate } from 'react-router-dom';
 const ShippingScreen = () => {
     const cart = useSelector((state) => state.cart);
     const { shippingAddress } = cart
-    // console.log(cart)
     const [fullName, setFullName] = useState(shippingAddress.fullName)
     const [city, setCity] = useState(shippingAddress.city)
     const [country, setCountry] = useState(shippingAddress.country)
@@ -32,7 +31,6 @@ const ShippingScreen = () => {
         e.preventDefault()
         dispatch(saveShippingAddress({fullName, city, country, address, postalCode}))
         navigate('/payment')
-        console.log("Navigate ")
 
     }
 

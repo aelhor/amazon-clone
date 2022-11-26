@@ -10,7 +10,6 @@ const CartScreen = (props) => {
     let location = useLocation()
     let qty = location.search ? parseInt(location.search.split('=')[1]) : 1
     let { id } = params
-    console.log(params, qty)
     const navigate = useNavigate();
 
     const cart = useSelector((state) => state.cart);
@@ -23,7 +22,6 @@ const CartScreen = (props) => {
     }, [dispatch, id, qty]);
 
     const removeFromCartHandler = (id) => {
-        console.log(id)
         // dispatch a remove fron=m cart action
         dispatch(removeFromCart(id))
     }

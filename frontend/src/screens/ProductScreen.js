@@ -11,7 +11,6 @@ const ProductScreen = (props) => {
     const [qty, setQty] = useState(1);
     const navigate = useNavigate();
     let { id } = useParams();
-    // console.log(id)
     const productDetails = useSelector((state) => state.productDetails);
     const { error, loading, product } = productDetails
     useEffect(() => {
@@ -20,7 +19,6 @@ const ProductScreen = (props) => {
 
     const addToCartHandler = () => {
         // props.history.push(`cart/${id}?qty=${qty}`)
-        console.log('Product added to cart ')
         navigate(`/cart/${ id }?qty=${ qty }`);
     }
 

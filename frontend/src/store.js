@@ -4,6 +4,7 @@ import { productDetailsReducer, productListReducer } from "./reducer/productRedu
 import { combineReducers } from 'redux'
 import { cartReducer } from './reducer/cartReducers';
 import { userRegisterReducer, userSigninReducer } from './reducer/userReducers'
+import { orderCreateReducer } from './reducer/orderreducer';
 const preloadedState = {
     cart: {
         cartItems: localStorage.getItem('cartItems')
@@ -25,7 +26,8 @@ const reducer = combineReducers({
     productDetails: productDetailsReducer,
     cart: cartReducer,
     userSignin: userSigninReducer,
-    userRegister: userRegisterReducer
+    userRegister: userRegisterReducer,
+    orderCreate :orderCreateReducer
 });
 
 // store is the container of initState and reducer 

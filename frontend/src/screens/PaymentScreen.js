@@ -20,13 +20,10 @@ const PaymentScreen = (props) => {
         dispatch(savePaymentMethod(paymentMethod))
         navigate('/placeorder')
     }
-    console.log(shippingAddress)
 
 
     useEffect(() => {
         if (!shippingAddress.data) {
-            console.log('shippingAddress: ',shippingAddress)
-            console.log(shippingAddress)
             navigate('/shipping')
         }
     }, [shippingAddress]);

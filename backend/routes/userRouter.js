@@ -25,10 +25,8 @@ userRouter.get('/', expressAsyncHandler(async (req, res) => {
 // POST /api/user/signin 
 userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
     const user = await User.findOne({ email: req.body.email })
-    console.log(req.body.password, user.password)
     if (user) {
         const match = await bcrypt.compare(req.body.password, user.password);
-        console.log('match: ', match)
         if (match) {
             return res.send({
                 _id: user._id,

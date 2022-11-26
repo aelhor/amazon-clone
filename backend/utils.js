@@ -24,7 +24,6 @@ const isAuth = (req, res, next)=> {
     const decoded =  jwt.verify(token, process.env.JWT_SECRET)
     if (decoded){
       req.user = decoded 
-      console.log('req.user: ', req.user)
 
       // user 'll be based in req.user to the next middleware 
       next()

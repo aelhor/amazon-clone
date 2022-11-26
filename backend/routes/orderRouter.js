@@ -12,18 +12,19 @@ orderRouter.get('/', expressAsyncHandler(async (req, res) => {
 );
 
 orderRouter.post('/', isAuth, expressAsyncHandler(async (req, res) => {
-    if (req.body.orderItems.length === 0) {
+    const data = req.body.order 
+    if (req.body.order.orderItems.length === 0) {
         return res.status(400).send('order is empty')
     }
     else {
         const order = new Order({
-            orderItems: req.body.orderItems,
-            shippingAddress: req.body.shippingAddress,
-            paymentMethod: req.body.paymentMethod,
-            itemsPrice: req.body.itemsPrice,
-            shippingPrice: req.body.shippingPrice,
-            taxPrice: req.body.taxPrice,
-            totalPrice: req.body.totalPrice,
+            orderItems: data.orderItems,
+            shippingAddress: data.shippingAddress.data,
+            paymentMethod: data.paymentMethod,
+            itemsPrice: data.itemsPrice,
+            shippingPrice: data.shippingPrice,
+            taxPrice: data.taxPrice,
+            totalPrice: data.totalPrice,
             user: req.user._id,
         })
         const savedOrder = await order.save() 

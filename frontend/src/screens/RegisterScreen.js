@@ -13,7 +13,6 @@ const RegisterScreen = (props) => {
     const navigate = useNavigate();
 
     const userRegister = useSelector((state) => state.userRegister);
-    console.log(userRegister)
     const { userInfo, loading, error } = userRegister;
 
     let location = useLocation()

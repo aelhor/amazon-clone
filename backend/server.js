@@ -8,6 +8,14 @@ const orderRouter = require('./routes/orderRouter')
 const dotenv =require('dotenv');
 
 dotenv.config();
+const cors = require('cors');
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
+
 
 // db connection 
 const connectionString = process.env.MONGODB_URI
