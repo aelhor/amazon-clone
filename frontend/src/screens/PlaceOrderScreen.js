@@ -6,6 +6,7 @@ import CheckoutSteps from '../components/Checkoutsteos'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import { savePrices } from '../actions/cartActions';
 
 const PlaceOrderScreen = () => {
 
@@ -15,10 +16,20 @@ const PlaceOrderScreen = () => {
     const orderCreate = useSelector((state) => state.orderCreate);
     const { loading, success, error, order } = orderCreate;
 
+    let prices = {}
+    const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
+    prices.itemsPrice = cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
+    prices.shippingPrice = prices.itemsPrice > 100 ? toPrice(0) : toPrice(10);
+    prices.taxPrice = toPrice(0.15 * prices.itemsPrice);
+    prices.totalPrice = prices.itemsPrice + prices.shippingPrice + prices.taxPrice;
 
+    console.log('Cart: ', cart)
 
     const navigate = useNavigate()
     useEffect(() => {
+        // dispatch actions for calcuating pricesand save them in cart 
+        dispatch(savePrices(prices))
+
         if (!cart.paymentMethod) {
             navigate('/payment')
         }
@@ -28,16 +39,14 @@ const PlaceOrderScreen = () => {
         }
     }, [cart.paymentMethod, success, order, dispatch, navigate])
 
-    // const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
-    // cart.itemsPrice = cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
-    // console.log('Cart: ', cart)
-    // cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
-    // cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
-    // cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
 
     const placeOrderHandler = (e) => {
-        dispatch(createOrder({ ...cart, orderItems: cart.cartItems }))
+        dispatch(createOrder({ ...cart, orderItems: cart.cartItems, 
+            itemsPrice: prices.itemsPrice,      
+            shippingPrice: prices.shippingPrice,
+            taxPrice: prices.taxPrice,
+            totalPrice: prices.totalPrice }))
     };
     return (
         <div>
@@ -96,19 +105,19 @@ const PlaceOrderScreen = () => {
                             <li>
                                 <div className="row">
                                     <div>Items</div>
-                                    <div>${cart.itemsPrice}</div>
+                                    <div>${prices.itemsPrice}</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="row">
                                     <div>Shipping</div>
-                                    <div>${cart.shippingPrice}</div>
+                                    <div>${prices.shippingPrice}</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="row">
                                     <div>Tax</div>
-                                    <div>${cart.taxPrice}</div>
+                                    <div>${prices.taxPrice}</div>
                                 </div>
                             </li>
                             <li>
@@ -117,7 +126,7 @@ const PlaceOrderScreen = () => {
                                         <strong> Order Total</strong>
                                     </div>
                                     <div>
-                                        <strong>${cart.totalPrice}</strong>
+                                        <strong>${prices.totalPrice}</strong>
                                     </div>
                                 </div>
                             </li>
