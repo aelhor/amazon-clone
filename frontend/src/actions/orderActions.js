@@ -7,7 +7,6 @@ export const createOrder = (order) => async (dispatch, getState) => {
 
     const store = getState()
     const { userInfo } = store.userSignin
-    // console.log('order: ', order)
 
     dispatch({ type: ORDER_CREATE_REQUEST, payload: order })
     try {

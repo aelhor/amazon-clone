@@ -23,7 +23,6 @@ const PlaceOrderScreen = () => {
     prices.taxPrice = toPrice(0.15 * prices.itemsPrice);
     prices.totalPrice = prices.itemsPrice + prices.shippingPrice + prices.taxPrice;
 
-    console.log('Cart: ', cart)
 
     const navigate = useNavigate()
     useEffect(() => {

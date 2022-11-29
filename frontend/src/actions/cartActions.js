@@ -33,7 +33,6 @@ export const saveShippingAddress = (data) => async (dispatch, getState) => {
 
 export const savePrices = (prices) => async (dispatch, getState) => {
     dispatch({ type: CART_SAVE_PRICES, payload: prices })
-    console.log('cartAction/prices :', prices)
 }
 
 
