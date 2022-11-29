@@ -31,6 +31,9 @@ mongoose.connect(connectionString, {
 app.use(express.json());
 
 // Routes
+app.get('/api/config/paypal', (req, res) => {
+    res.send(process.env.PAYPAL_CLIEND_ID||'sandbox')
+})
 app.get('/', (req, res) => {
     res.send("amazon clone")
 })
