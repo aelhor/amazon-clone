@@ -2,12 +2,13 @@ const Order = require('../models/orderModel')
 const express = require('express')
 const expressAsyncHandler = require('express-async-handler')
 const { isAuth } = require('../utils');
+const order = require('../models/orderModel');
 
 const orderRouter = express.Router();
 
+// dev endpoint
 // route : GET /api/orders
 // disc : get all oredrs 
-// dev endpoint
 orderRouter.get('/', expressAsyncHandler(async (req, res) => {
     const orders = await Order.find({})
     res.send({ count: orders.length, orders: orders })
@@ -15,14 +16,24 @@ orderRouter.get('/', expressAsyncHandler(async (req, res) => {
 );
 
 
+
+
+// route : GET /api/orders/all
+// disc : get all oredrs for a specific user 
+orderRouter.get('/all', isAuth, expressAsyncHandler(async (req, res) => {
+    const userId = req.user._id
+    const ordres = await Order.find({ user: userId })
+    res.send(ordres)
+}))
+
+
 // route : GET /api/orders:orderId
 // disc : get an order by ID
-orderRouter.get('/:orderId', isAuth, expressAsyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.orderId)
+orderRouter.get('/:id', isAuth, expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id)
     res.send(order)
 })
 );
-
 
 // route : POST /api/orders
 // disc : create an order
@@ -66,10 +77,14 @@ orderRouter.put('/:orderId/pay', isAuth, expressAsyncHandler(async (req, res) =>
             email_address: req.body.email_address,
         }
         const updatedOrder = await Order.save()
-        res.send({messsage: 'order paid', order:updatedOrder})
+        res.send({ messsage: 'order paid', order: updatedOrder })
     }
-    else{
-        res.status.apply(404).send({messsage:"order not found"})
+    else {
+        res.status.apply(404).send({ messsage: "order not found" })
     }
 }))
+
+
+
+
 module.exports = orderRouter
