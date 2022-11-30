@@ -13,6 +13,7 @@ import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/orderScreen';
+import OrdresHistoryScreen from './screens/ordersHistoryScreen';
 function App() {
   const cart = useSelector(state => state.cart)
   const { cartItems } = cart
@@ -69,6 +70,7 @@ function App() {
             <Route path="/payment/" element={<PaymentScreen />} ></Route>
             <Route path="/placeorder/" element={<PlaceOrderScreen />} ></Route>
             <Route path="/order/:orderId" element={<OrderScreen />} ></Route>
+            <Route path="/ordershistory" element={<OrdresHistoryScreen/>} ></Route>
 
           </Routes>
 

@@ -4,7 +4,7 @@ import { productDetailsReducer, productListReducer } from "./reducer/productRedu
 import { combineReducers } from 'redux'
 import { cartReducer } from './reducer/cartReducers';
 import { userRegisterReducer, userSigninReducer } from './reducer/userReducers'
-import { orderCreateReducer, orderPayReducer, oredrDetailsReducer } from './reducer/orderreducer';
+import { orderCreateReducer, orderPayReducer, oredrDetailsReducer, oredrsMineListReducer } from './reducer/orderreducer';
 const preloadedState = {
     cart: {
         cartItems: localStorage.getItem('cartItems')
@@ -29,7 +29,8 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     orderCreate :orderCreateReducer,
     orderDetails : oredrDetailsReducer,
-    orderPay:orderPayReducer
+    orderPay:orderPayReducer,
+    orderMineList:oredrsMineListReducer
 
 });
 
