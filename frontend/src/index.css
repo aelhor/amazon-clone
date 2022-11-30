@@ -152,6 +152,10 @@ img.large {
 .error {
   color: #a02020;
 }
+.alert-success {
+  color: #20a020;
+  background-color: #eeffe0;
+}
 
 .danger {
   color: #a02020;
