@@ -47,8 +47,13 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
+                    <Link to="/ordershistory">
+                      History
+                    </Link>
+                  </li>
+                  <li>
                     <Link to="#signout" onClick={signoutHandler}>
-                      Sign Out
+                      Signout
                     </Link>
                   </li>
                 </ul>
@@ -70,7 +75,7 @@ function App() {
             <Route path="/payment/" element={<PaymentScreen />} ></Route>
             <Route path="/placeorder/" element={<PlaceOrderScreen />} ></Route>
             <Route path="/order/:orderId" element={<OrderScreen />} ></Route>
-            <Route path="/ordershistory" element={<OrdresHistoryScreen/>} ></Route>
+            <Route path="/ordershistory" element={<OrdresHistoryScreen />} ></Route>
 
           </Routes>
 
