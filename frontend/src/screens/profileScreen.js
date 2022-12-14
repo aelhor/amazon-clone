@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import { detailsUser, updateUser } from '../actions/userActions'
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
@@ -21,21 +20,18 @@ const ProfileScreen = () => {
 
     const userUpdate = useSelector((state) => state.userUpdate);
     const { success: successUpdate, error: errorUpdate, loading: loadingUpdate, } = userUpdate;
-    const navigate = useNavigate()
     useEffect(() => {
-        if (!userInfo) {
-            navigate('/signup')
-        } else {
-            if (!user) {
-                dispatch({ type: USER_UPDATE_PROFILE_RESET });
 
-                dispatch(detailsUser())
-            }
-            else {
-                setName(user.name)
-                setEmail(user.email)
-            }
+        if (!user) {
+            dispatch({ type: USER_UPDATE_PROFILE_RESET });
+
+            dispatch(detailsUser())
         }
+        else {
+            setName(user.name)
+            setEmail(user.email)
+        }
+
 
     }, [dispatch, user])
 

@@ -15,6 +15,9 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/orderScreen';
 import OrdresHistoryScreen from './screens/ordersHistoryScreen';
 import ProfileScreen from './screens/profileScreen';
+import AdminRoute from './components/AdminRoute';
+import PrivateRoute from './components/privateRoute';
+
 function App() {
   const cart = useSelector(state => state.cart)
   const { cartItems } = cart
@@ -53,33 +56,68 @@ function App() {
                     </Link>
                   </li>
                   <li>
+                    <Link to="/ordershistory">
+                      History
+                    </Link>
+                  </li>
+                  <li>
                     <Link to="#signout" onClick={signoutHandler}>
                       Signout
                     </Link>
                   </li>
                 </ul>
               </div>
-            ) : (
-              <Link to="/signin">Sign In</Link>
-            )}
+            ) :
+              (
+                <Link to="/signin">Sign In</Link>
+              )}
+            {userInfo && userInfo.isAdmin &&
+              (
+                <div className="dropdown">
+                  <Link to="#admin">
+                    Admin <i className="fa fa-caret-down"></i>
+                  </Link>
+                  <ul className="dropdown-content">
+                    <li>
+                      <Link to="/dashboard">Dashboard</Link>
+                    </li>
+                    <li>
+                      <Link to="/productlist">Products</Link>
+                    </li>
+                    <li>
+                      <Link to="/orderlist">Orders</Link>
+                    </li>
+                    <li>
+                      <Link to="/userlist">Users</Link>
+                    </li>
+                  </ul>
+                </div>
+
+              )}
           </div>
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<HomeScreen />} exact></Route>
-            <Route path="/product/:id" element={<ProductScreen />} ></Route>
-            <Route path="/cart/" element={<CartScreen />} ></Route>
-            <Route path="/cart/:id" element={<CartScreen />} ></Route>
-            <Route path="/signin/" element={<SinginScreen />} ></Route>
-            <Route path="/register/" element={<RegisterScreen />} ></Route>
-            <Route path="/shipping/" element={<ShippingScreen />} ></Route>
-            <Route path="/payment/" element={<PaymentScreen />} ></Route>
-            <Route path="/placeorder/" element={<PlaceOrderScreen />} ></Route>
-            <Route path="/order/:orderId" element={<OrderScreen />} ></Route>
-            <Route path="/ordershistory" element={<OrdresHistoryScreen />} ></Route>
-            <Route path="/profile/" element={<ProfileScreen />} ></Route>
+              <Route path="/" element={<HomeScreen />} exact></Route>
+              <Route path="/product/:id" element={<ProductScreen />} ></Route>
+              <Route path="/cart/" element={<CartScreen />} ></Route>
+              <Route path="/cart/:id" element={<CartScreen />} ></Route>
+              <Route path="/signin/" element={<SinginScreen />} ></Route>
+              <Route path="/register/" element={<RegisterScreen />} ></Route>
+              <Route path="/shipping/" element={<ShippingScreen />} ></Route>
+              <Route path="/payment/" element={<PaymentScreen />} ></Route>
+              <Route path="/placeorder/" element={<PlaceOrderScreen />} ></Route>
+              <Route path="/order/:orderId" element={<OrderScreen />} ></Route>
+              <Route path="/ordershistory" element={<OrdresHistoryScreen />} ></Route>
+              
+              <Route  element={<PrivateRoute />} >
+                <Route path="/profile/" element={<ProfileScreen />} ></Route>
+              </Route>
 
-
+              
+              <Route  element={<AdminRoute />} >
+                <Route path="/admin/" element ></Route>
+              </Route>
           </Routes>
 
 
