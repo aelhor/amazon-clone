@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { productDetailsReducer, productListReducer } from "./reducer/productReducer";
 import { combineReducers } from 'redux'
 import { cartReducer } from './reducer/cartReducers';
-import { userRegisterReducer, userSigninReducer } from './reducer/userReducers'
+import { userDetailsReducer, userRegisterReducer, userSigninReducer, userUpdateReducer } from './reducer/userReducers'
 import { orderCreateReducer, orderPayReducer, oredrDetailsReducer, oredrsMineListReducer } from './reducer/orderreducer';
 const preloadedState = {
     cart: {
@@ -27,10 +27,12 @@ const reducer = combineReducers({
     cart: cartReducer,
     userSignin: userSigninReducer,
     userRegister: userRegisterReducer,
-    orderCreate :orderCreateReducer,
-    orderDetails : oredrDetailsReducer,
-    orderPay:orderPayReducer,
-    orderMineList:oredrsMineListReducer
+    orderCreate: orderCreateReducer,
+    orderDetails: oredrDetailsReducer,
+    orderPay: orderPayReducer,
+    orderMineList: oredrsMineListReducer,
+    userDetails: userDetailsReducer,
+    userUpdate: userUpdateReducer
 
 });
 

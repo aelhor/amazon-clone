@@ -14,6 +14,7 @@ import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/orderScreen';
 import OrdresHistoryScreen from './screens/ordersHistoryScreen';
+import ProfileScreen from './screens/profileScreen';
 function App() {
   const cart = useSelector(state => state.cart)
   const { cartItems } = cart
@@ -47,8 +48,8 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/ordershistory">
-                      History
+                    <Link to="/profile">
+                      profile
                     </Link>
                   </li>
                   <li>
@@ -76,6 +77,8 @@ function App() {
             <Route path="/placeorder/" element={<PlaceOrderScreen />} ></Route>
             <Route path="/order/:orderId" element={<OrderScreen />} ></Route>
             <Route path="/ordershistory" element={<OrdresHistoryScreen />} ></Route>
+            <Route path="/profile/" element={<ProfileScreen />} ></Route>
+
 
           </Routes>
 
