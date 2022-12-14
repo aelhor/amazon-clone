@@ -5,7 +5,7 @@ const userRouter = express.Router();
 // don't write try catch use expressAsyncHandler insted
 const expressAsyncHandler = require('express-async-handler')
 const bcrypt = require('bcrypt')
-const { generateToken } = require('../utils')
+const { generateToken, isAuth } = require('../utils')
 
 
 // dev route
@@ -15,12 +15,20 @@ userRouter.get('/seed', expressAsyncHandler(async (req, res) => {
 })
 );
 
+// dev route
 // GET 'all users' /api/users 
-userRouter.get('/', expressAsyncHandler(async (req, res) => {
+userRouter.get('/all', expressAsyncHandler(async (req, res) => {
     const users = await User.find()
-    res.send({count: users.length, users: users})
+    res.send({ count: users.length, users: users })
 }))
 
+// route : GET /api/users:id
+// desc : Get user info by his id
+userRouter.get('/', isAuth, expressAsyncHandler(async (req, res) => {
+    const userId = req.user._id
+    const user = await User.findById(userId)
+    res.status(200).send(user)
+}))
 
 // POST /api/user/signin 
 userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
@@ -51,13 +59,40 @@ userRouter.post('/register', expressAsyncHandler(async (req, res) => {
     const createdUser = await user.save()
     res.status(200).send({
         _id: createdUser._id,
-      name: createdUser.name,
-      email: createdUser.email,
-      isAdmin: createdUser.isAdmin,
-      token: generateToken(createdUser),
+        name: createdUser.name,
+        email: createdUser.email,
+        isAdmin: createdUser.isAdmin,
+        token: generateToken(createdUser),
     })
 })
 );
 
+
+// route : PUT api/users
+// decs  : update user information 
+userRouter.put('/', isAuth, expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id)
+    // console.log(req.body)
+    if (user) {
+        user.name = req.body.name|| user.name;
+        user.email = req.body.email || user.email;
+        if (req.body.password) {
+            user.password = bcrypt.hashSync(req.body.password, 8);
+        }
+        const updatedUser = await user.save();
+        console.log(updatedUser)
+        res.status(200).send({
+            message: 'User info updated sucessfully',
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            isAdmin: updatedUser.isAdmin,
+            token: generateToken(updatedUser),
+        })
+
+    } else {
+        res.status(404).send('User Not Found')
+    }
+}))
 module.exports = userRouter
 
