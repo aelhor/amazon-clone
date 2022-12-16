@@ -7,6 +7,6 @@ export default function PrivateRoute({ component: Component, ...rest }) {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     return (
-      userInfo.iaAdmin?<Outlet></Outlet> : <Navigate to='/'></Navigate>
+      userInfo.isAdmin?<Outlet/> : <Navigate to='/'></Navigate>
     );
 }

@@ -89,7 +89,9 @@ button {
 button.small {
   font-size: 1.2rem;
 }
-
+.red_btn {
+  color: #f02020;
+}
 button:hover {
   border: 0.1rem #404040 solid;
 }

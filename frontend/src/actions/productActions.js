@@ -9,7 +9,7 @@ export const listProducts = () => async (dispatch) => {
         type: PRODUCT_LIST_REQUEST,
     });
     try {
-        const { data } = await axios.get('/api/products');
+        const { data } = await axios.get('http://localhost:5000/api/products');
         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     } catch (error) {
         dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
