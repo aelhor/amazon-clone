@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { listProducts } from '../../actions/productActions';
 import LoadingBox from '../../components/LoadingBox';
 import MessageBox from '../../components/MessageBox';
@@ -11,10 +11,10 @@ const ProductsListScreen = () => {
     const productList = useSelector((state) => state.productList);
     const { loading, error, products } = productList;
     const navigate = useNavigate();
+    
     useEffect(() => {
         dispatch(listProducts())
     }, [])
-
     const showProductDetails = (id)=> {
         navigate(`/product/${id}`)
     }
@@ -23,6 +23,9 @@ const ProductsListScreen = () => {
     }
     return (
         <div>
+            <button className='primary'>
+                <Link to='/newproduct' style={{color:'#FFF'}}>Add Product</Link>
+            </button>
             <h1>Products</h1>{console.log(products)}
             {
                 loading ? <LoadingBox /> :
