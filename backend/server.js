@@ -5,14 +5,15 @@ const mongoose = require('mongoose')
 const userRouter = require('./routes/userRouter')
 const productRouter = require('./routes/productRouter')
 const orderRouter = require('./routes/orderRouter')
-const dotenv =require('dotenv');
+const dotenv = require('dotenv');
+const path = require('path')
 
 dotenv.config();
 const cors = require('cors');
-const corsOptions ={
-    origin:'http://localhost:3000', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,            //access-control-allow-credentials:true
+    optionSuccessStatus: 200
 }
 app.use(cors(corsOptions));
 
@@ -29,10 +30,11 @@ mongoose.connect(connectionString, {
 })
 // middelewares
 app.use(express.json());
-
+// const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 // Routes
 app.get('/api/config/paypal', (req, res) => {
-    res.send(process.env.PAYPAL_CLIEND_ID||'sandbox')
+    res.send(process.env.PAYPAL_CLIEND_ID || 'sandbox')
 })
 app.get('/', (req, res) => {
     res.send("amazon clone")
