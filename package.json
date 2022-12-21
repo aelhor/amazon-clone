@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build" : "cd backend && cd ../frontend $$ npm install && npm run build",
     "start": "node backend/server.js",
     "dev": "nodemon  backend/server.js"
   },
@@ -11,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/aelhor/amazon-clone.git"
   },
-  "author": "",
+  "author": "Ahmed Elhor",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/aelhor/amazon-clone/issues"
