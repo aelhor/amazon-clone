@@ -5,12 +5,14 @@ import MessageBox from "../components/MessageBox";
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 
+import {liveURL} from '../prod'
 const HomeScreen = () => {
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.productList);
     const { loading, error, products } = productList;
 
     useEffect(() => {
+        console.log('liveURL: ', liveURL)
         dispatch(listProducts());
     }, [dispatch]);
 
