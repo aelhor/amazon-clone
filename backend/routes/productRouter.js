@@ -45,9 +45,7 @@ const upload = multer({ storage })
 
 productRouter.post('/', isAuth, isAdmin, upload.single('image'), expressAsyncHandler(async (req, res) => {
     if (req.file) {
-        console.log('req.file: ',req.file)
-        console.log('req.body: ',req.body)
-
+        
         const product = new Product({
             image: req.file.path,
             name: req.body.name,

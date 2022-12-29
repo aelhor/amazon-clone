@@ -63,7 +63,7 @@ export const detailsUser = () => async (dispatch, getState) => {
     try {
         const { data } = await axios({
             method: 'get',
-            url: `http://localhost:5000/api/users`,
+            url: `/api/users`,
             headers: {
                 authorization: `bearer ${userInfo.token}`
             }
@@ -91,8 +91,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
     try {
         const { data } = await axios({
             method: 'put',
-            url: `http://localhost:5000/api/users/`,
-            // url: '/api/orders',
+            url: '/api/users',
             data: user,
             headers: {
                 authorization: `bearer ${userInfo.token}`

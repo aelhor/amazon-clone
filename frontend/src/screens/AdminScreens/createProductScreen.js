@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom';
+import React, {  useState } from 'react'
+import {  useSelector } from 'react-redux'
 import axios from 'axios'
 import MessageBox from '../../components/MessageBox';
 import LoadingBox from '../../components/LoadingBox';
@@ -23,19 +22,15 @@ const CreateProductScreen = () => {
     const [loading, setLoading] = useState(false)
     const [sucess, setSucess] = useState(false)
     
-
-
     const inputhandler = (e) => {
         setInputFields({ ...inputFields, [e.target.name]: e.target.value })
     }
     const imageUpload = (e) => {
-        console.log(e.target.files[0])
         setInputFields({ ...inputFields, image: e.target.files[0] })
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        // console.log('inputFields: ', inputFields)
         const bodyFormData = new FormData()
         bodyFormData.append('name', inputFields.name)
         bodyFormData.append('brand', inputFields.brand)
@@ -48,7 +43,7 @@ const CreateProductScreen = () => {
         try {
             const { data } = await axios({
                 method: 'post',
-                url: 'http://localhost:5000/api/products',
+                url: '/api/products/',
                 data: bodyFormData,
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -57,7 +52,6 @@ const CreateProductScreen = () => {
             })
             setLoading(false);
             setSucess(true)
-            // console.log(data)
         } catch (error) {
             setError(error.response.data.message)
             console.log(error)

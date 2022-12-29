@@ -39,7 +39,6 @@ orderRouter.get('/:id', isAuth, expressAsyncHandler(async (req, res) => {
 // disc : create an order
 orderRouter.post('/', isAuth, expressAsyncHandler(async (req, res) => {
     const data = req.body.order
-    console.log('data: ', data)
     if (req.body.order.orderItems.length === 0) {
         return res.status(400).send('order is empty')
     }

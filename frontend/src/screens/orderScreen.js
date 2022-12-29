@@ -49,7 +49,6 @@ const OrderScreen = (props) => {
     }, [dispatch, orderId, order, sdkReady, successPay])
 
     const successPaymentHandler = (paymentResult) => {
-        // console.log('successPaymentHnadler')
         dispatch(payOrder(order, paymentResult))
     }
 

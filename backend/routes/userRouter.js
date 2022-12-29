@@ -72,7 +72,7 @@ userRouter.post('/register', expressAsyncHandler(async (req, res) => {
 // decs  : update user information 
 userRouter.put('/', isAuth, expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
-    // console.log(req.body)
+    
     if (user) {
         user.name = req.body.name|| user.name;
         user.email = req.body.email || user.email;
@@ -80,7 +80,6 @@ userRouter.put('/', isAuth, expressAsyncHandler(async (req, res) => {
             user.password = bcrypt.hashSync(req.body.password, 8);
         }
         const updatedUser = await user.save();
-        console.log(updatedUser)
         res.status(200).send({
             message: 'User info updated sucessfully',
             _id: updatedUser._id,

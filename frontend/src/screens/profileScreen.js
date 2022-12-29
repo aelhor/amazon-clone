@@ -12,7 +12,6 @@ const ProfileScreen = () => {
     const { loading, error, user } = userDetails
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
-    console.log('userInfo', userInfo)
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

@@ -12,7 +12,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     try {
         const { data } = await axios({
             method: 'post',
-            url: 'http://localhost:5000/api/orders',
+            url: '/api/orders',
             // url: '/api/orders',
             data: { order },
             headers: {
@@ -46,7 +46,7 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
     try {
         const { data } = await axios({
             method: 'get',
-            url: `http://localhost:5000/api/orders/${orderId}`,
+            url: `/api/orders/${orderId}`,
             headers: {
                 authorization: `bearer ${userInfo.token}`
             }
@@ -71,7 +71,7 @@ export const payOrder = (order, paymentResult) => async (dispatch, getState) => 
     try {
         const { data } = await axios({
             method: 'put',
-            url: `http://localhost:5000/api/orders/${order._id}/pay`,
+            url: `/api/orders/${order._id}/pay`,
             // url: '/api/orders',
             data: {paymentResult},
             headers: {
@@ -101,7 +101,7 @@ export const listOrderMine= (orderId) => async (dispatch, getState) => {
     try {
         const { data } = await axios({
             method: 'get',
-            url: `http://localhost:5000/api/orders/all`,
+            url: `/api/orders/all`,
             headers: {
                 authorization: `bearer ${userInfo.token}`
             }
