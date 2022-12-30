@@ -3,10 +3,9 @@ import {  useSelector } from 'react-redux'
 import axios from 'axios'
 import MessageBox from '../../components/MessageBox';
 import LoadingBox from '../../components/LoadingBox';
-
+import {url} from '../../prod'
 
 const CreateProductScreen = () => {
-
     const [inputFields, setInputFields] = useState({
         name: '',
         brand: '',
@@ -43,15 +42,17 @@ const CreateProductScreen = () => {
         try {
             const { data } = await axios({
                 method: 'post',
-                url: '/api/products/',
+                url: url+'api/products/',
                 data: bodyFormData,
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     authorization: `bearer ${userInfo.token}`
                 }
             })
-            setLoading(false);
             setSucess(true)
+            setLoading(false);
+
+
         } catch (error) {
             setError(error.response.data.message)
             console.log(error)

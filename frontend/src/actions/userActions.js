@@ -1,6 +1,9 @@
 import { USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../constants/userConstants";
 import axios from "axios";
 
+import {url} from '../prod'
+
+
 export const signin = (email, password) => async (dispatch) => {
     dispatch({
         type: USER_SIGNIN_REQUEST, payload: { email, password }
@@ -8,7 +11,7 @@ export const signin = (email, password) => async (dispatch) => {
     try {
         const { data } = await axios({
             method: 'post',
-            url: '/api/users/signin',
+            url: url+'api/users/signin',
             data: { email, password }
         })
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
@@ -37,7 +40,7 @@ export const signout = () => async (dispatch) => {
 export const register = (name, email, password) => async (dispatch) => {
     dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
     try {
-        const { data } = await axios.post('/api/users/register', {
+        const { data } = await axios.post(url+'api/users/register', {
             name,
             email,
             password,
@@ -63,7 +66,7 @@ export const detailsUser = () => async (dispatch, getState) => {
     try {
         const { data } = await axios({
             method: 'get',
-            url: `/api/users`,
+            url: `${url}api/users`,
             headers: {
                 authorization: `bearer ${userInfo.token}`
             }
@@ -91,7 +94,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
     try {
         const { data } = await axios({
             method: 'put',
-            url: '/api/users',
+            url: url+'api/users',
             data: user,
             headers: {
                 authorization: `bearer ${userInfo.token}`

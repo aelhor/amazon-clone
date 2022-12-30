@@ -3,6 +3,8 @@ import axios from 'axios'
 import { CART_EMPTY } from '../constants/cartConstants'
 import { ORDER_CREATE_FAIL, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_MINE_LIST_FAIL, ORDER_MINE_LIST_REQUEST, ORDER_MINE_LIST_SUCCESS, ORDER_PAY_FAIL, ORDER_PAY_REQUEST, ORDER_PAY_SUCCESS } from '../constants/orderConstants'
 
+import {url} from '../prod'
+
 export const createOrder = (order) => async (dispatch, getState) => {
 
     const store = getState()
@@ -12,7 +14,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     try {
         const { data } = await axios({
             method: 'post',
-            url: '/api/orders',
+            url: url+'api/orders',
             // url: '/api/orders',
             data: { order },
             headers: {
@@ -46,7 +48,7 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
     try {
         const { data } = await axios({
             method: 'get',
-            url: `/api/orders/${orderId}`,
+            url: url + `api/orders/${orderId}`,
             headers: {
                 authorization: `bearer ${userInfo.token}`
             }
@@ -71,7 +73,7 @@ export const payOrder = (order, paymentResult) => async (dispatch, getState) => 
     try {
         const { data } = await axios({
             method: 'put',
-            url: `/api/orders/${order._id}/pay`,
+            url: `${url}api/orders/${order._id}/pay`,
             // url: '/api/orders',
             data: {paymentResult},
             headers: {
@@ -101,7 +103,7 @@ export const listOrderMine= (orderId) => async (dispatch, getState) => {
     try {
         const { data } = await axios({
             method: 'get',
-            url: `/api/orders/all`,
+            url: `${url}api/orders/all`,
             headers: {
                 authorization: `bearer ${userInfo.token}`
             }

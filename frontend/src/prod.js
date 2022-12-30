@@ -1,3 +1,5 @@
-export const liveURL = 'https://amazon-clone-rgx4.onrender.com/'
+const liveURL = 'https://amazon-clone-rgx4.onrender.com/'
+const devURL = 'http://localhost:5000/'
+const prod = false
 
-export const x = 0
+export let url = prod ? liveURL : devURL
