@@ -52,7 +52,6 @@ const CreateProductScreen = () => {
             setSucess(true)
             setLoading(false);
 
-
         } catch (error) {
             setError(error.response.data.message)
             console.log(error)

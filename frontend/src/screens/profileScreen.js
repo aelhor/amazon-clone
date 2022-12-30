@@ -11,7 +11,6 @@ const ProfileScreen = () => {
     const userDetails = useSelector(state => state.userDetails)
     const { loading, error, user } = userDetails
     const userSignin = useSelector((state) => state.userSignin);
-    const { userInfo } = userSignin;
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
